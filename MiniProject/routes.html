@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Routes- Aero Shuttle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        .nav-item {
+                margin-right: 10px; /* Add some spacing between navbar items */
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AeroExpress</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="book_shuttle.html">Book Shuttle</a>
+            </li>
+            <!--
+              <li class="nav-item">
+              <a class="nav-link" href="view_bookings.html">View Bookings</a>
+            </li>
+            -->
+            
+            <li class="nav-item">
+              <a class="nav-link" href="routes.html">Routes</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([19.0953, 72.8658], 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 75,}).addTo(map);
+
+        var terminals = [{ name: "Terminal 1", lat: 19.0931, lon: 72.8568},{ name: "Terminal 2", lat: 19.09753, lon: 72.8747 }];
+        terminals.forEach(function (terminal) { L.marker([terminal.lat, terminal.lon]).addTo(map) .bindPopup(terminal.name);});
+        var routes = [
+        { name: "A", from: "Terminal 1", to: "Terminal 2", coordinates: [[19.089316, 72.867630], [19.097042, 72.874606]] },
+        { name: "B", from: "Terminal 2", to: "Terminal 1", coordinates: [[19.095331, 72.872832], [19.097042, 72.874606]] },
+        { name: "C", from: "Terminal 1", to: "Terminal 2", coordinates: [[19.097042, 72.874606], [19.095331, 72.872832]] }
+        ];
+        //routes.forEach(function (route) {
+        //L.polyline(route.coordinates, { color: 'blue' }).addTo(map).bindPopup(route.name);
+        //});
+    </script>
+    
+</body>
+</html>
